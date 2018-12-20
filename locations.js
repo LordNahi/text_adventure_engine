@@ -6,9 +6,11 @@
 // name: String value representing item name
 // description: Will be read out when user inspects item ...
 
-export const locations = {
-	desk: {
-		description: "",
-		items: []
-	}
+const locations = {
+    desk: {
+        description: "",
+        items: []
+    }
 };
+
+module.exports = locations;

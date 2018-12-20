@@ -1,28 +1,28 @@
 class Item {
-	name;
-	description;
+    name;
+    description;
 
-	constructor(name, description) {
-		this.name = name;
-		this.description = description;
-	}
+    constructor(name, description) {
+        this.name = name;
+        this.description = description;
+    }
 
-	inspect() {
-		const vowels = "aeiou";
+    inspect() {
+        const vowels = "aeiou";
 
-		let startsWithVowel = false;
-		if (vowels.split("").indexOf(this.name[0]) > -1) {
-			startsWithVowel = true;
-		}
+        let startsWithVowel = false;
+        if (vowels.split("").indexOf(this.name[0]) > -1) {
+            startsWithVowel = true;
+        }
 
-		console.log(
-			startsWithVowel ? "It's an " + this.name : "It's a " + this.name
-		);
-	}
+        console.log(
+            startsWithVowel ? "It's an " + this.name : "It's a " + this.name
+        );
+    }
 
-	describe() {
-		console.log(this.description);
-	}
+    describe() {
+        console.log(this.description);
+    }
 }
 
-export default Item;
+module.exports = Item;

@@ -1,10 +1,10 @@
 class Location {
-	description = "There's nothing here to see";
-	items = [];
-	map;
+    description = "There's nothing here to see";
+    items = [];
+    map;
 
-	constructor(map, initialItems) {
-		this.map = map;
-		this.item = initialItems;
-	}
+    constructor(map, initialItems) {
+        this.map = map;
+        this.item = initialItems;
+    }
 }
