@@ -6,6 +6,13 @@ import { Directions } from "./directions";
 import { BaseSpace, Point } from "./types";
 
 // TODO: Break the narrator out into its own class ...
+// TODO: Ideally, the user could specify a JSON file for the entire game,
+//       allowing for ability to create own adventures, instead of being
+//       either a 'number | Location', it should only consist of Location's
+//       and we run a script that parses the users JSON and converts each
+//       room into Location object, the load will simply fail is they don't
+//       format their JSON correctly...
+
 const narrator = readline.createInterface({
 	input: process.stdin,
 	output: process.stdout
