@@ -21,7 +21,14 @@ const inputLog = [];
 const messageLog = [];
 
 const position: Point = { x: 0, y: 0 };
-const world: (Location | number)[][] = [[new Location()]];
+
+// Locations ...
+const desk = new Location(
+	"Desk",
+	"I'm sitting at my messy desk, at a glance, there are approximately five empty AllPress coffee cups that need to be thrown out."
+);
+
+const world: (Location | number)[][] = [[desk]];
 
 function promptUser() {
 	narrator.question("What do you do?: ", answer => {
@@ -173,6 +180,8 @@ function logAnswer(answer: string) {
 }
 
 function logResponse(response: string) {
+	// TODO: Implement line lengths ...
+
 	messageLog.push(response);
 
 	console.log("\n", response, "\n");
