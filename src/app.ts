@@ -62,7 +62,7 @@ function handleAnswer(answer: string) {
 	}
 }
 
-function move(direction: Directions) {
+function move(direction: string) {
 	switch (direction) {
 		case Directions.North:
 			break;
@@ -78,7 +78,7 @@ function move(direction: Directions) {
 	}
 }
 
-function isAction(actionType: string, action: BaseActions) {
+function isAction(actionType: string, action: string) {
 	return actions[actionType].indexOf(action) >= 0;
 }
 
@@ -108,11 +108,11 @@ function intro() {
 	);
 }
 
-function logAnswer(answer) {
+function logAnswer(answer: string) {
 	inputLog.push(answer);
 }
 
-function logResponse(response) {
+function logResponse(response: string) {
 	messageLog.push(response);
 
 	console.log("\n", response, "\n");
