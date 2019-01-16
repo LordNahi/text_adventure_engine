@@ -1,8 +1,11 @@
-import { actions, BaseActions } from "./actions";
-import { Directions } from "./directions";
-
 import readline from "readline";
 
+import Location from "./location";
+import { actions, BaseActions } from "./actions";
+import { Directions } from "./directions";
+import { BaseSpace, Point } from "./types";
+
+// TODO: Break the narrator out into its own class ...
 const narrator = readline.createInterface({
 	input: process.stdin,
 	output: process.stdout
@@ -10,16 +13,8 @@ const narrator = readline.createInterface({
 const inputLog = [];
 const messageLog = [];
 
-const xx = 0;
-const yy = 0;
-const world = [
-	[-1, -1, -1, -1, -1, -1],
-	[-1, -1, -1, -1, -1, -1],
-	[-1, -1, -1, -1, -1, -1],
-	[-1, -1, -1, -1, -1, -1],
-	[-1, -1, -1, -1, -1, -1],
-	[-1, -1, -1, -1, -1, -1]
-];
+const position: Point = { x: 0, y: 0 };
+const world: (Location | number)[][] = [[new Location()]];
 
 function promptUser() {
 	narrator.question("What do you do?: ", answer => {
@@ -33,49 +28,107 @@ function promptUser() {
 function handleAnswer(answer: string) {
 	const words = answer.split(" ");
 
-	let action = "";
-	let object = "";
-	let parameter = "";
+	let verb = "";
+	let noun = "";
 
 	// Split up words ...
 	switch (words.length) {
 		case 1:
-			action = words[0];
+			verb = words[0];
 			break;
 		case 2:
-			action = words[0];
-			object = words[1];
+			verb = words[0];
+			noun = words[1];
 			break;
 	}
 
 	// Handle action ...
-	if (action === "") {
+	if (verb === "") {
 		logResponse("You do nothing.");
 	} else {
-		if (isAction("move", action)) {
-			move(parameter);
-		} else if (isAction("interact", action)) {
-		} else if (isAction("attack", action)) {
+		if (isAction(BaseActions.move, verb)) {
+			move(noun);
+		} else if (isAction(BaseActions.interact, verb)) {
+		} else if (isAction(BaseActions.attack, verb)) {
+		} else if (isAction(BaseActions.look, verb)) {
+			look();
 		} else {
-			logResponse("I don't know how to " + action);
+			logResponse("I don't know how to " + verb);
 		}
+	}
+}
+
+function look() {
+	const currentLocation = world[position.y][position.x];
+
+	if (typeof currentLocation === "number") {
+		switch (currentLocation) {
+			case BaseSpace.EmptySpace:
+				logResponse("There's nothing of interest here.");
+				break;
+		}
+	} else {
+		logResponse(currentLocation.description);
 	}
 }
 
 function move(direction: string) {
 	switch (direction) {
 		case Directions.North:
+			if (canMove(position, 0, -1)) {
+				logResponse("Headed North...");
+				position.y += -1;
+			}
 			break;
 		case Directions.East:
+			if (canMove(position, 1, 0)) {
+				logResponse("Headed East...");
+				position.x += 1;
+			}
 			break;
 		case Directions.South:
+			if (canMove(position, 0, 1)) {
+				logResponse("Headed South...");
+				position.y += 1;
+			}
 			break;
 		case Directions.West:
+			if (canMove(position, -1, 0)) {
+				logResponse("Headed West...");
+				position.x += -1;
+			}
 			break;
 		default:
 			logResponse(direction + " is not a direction.");
 			break;
 	}
+}
+
+function canMove(currentPosition: Point, x: number, y: number) {
+	const xx = currentPosition.x + x;
+	const yy = currentPosition.y + y;
+	const potentialLocation = world[yy] && world[yy][xx];
+
+	let canMove = false;
+
+	if (potentialLocation) {
+		if (typeof potentialLocation === "number") {
+			switch (potentialLocation) {
+				case BaseSpace.EmptySpace:
+					canMove = true;
+					break;
+				case BaseSpace.wall:
+					logResponse("A wall blocks your way...");
+					break;
+			}
+		} else {
+			canMove = true;
+		}
+	}
+
+	!canMove && logResponse("You are unable to move.");
+
+	return canMove;
 }
 
 function isAction(actionType: string, action: string) {
@@ -125,5 +178,3 @@ function beginStory() {
 
 // Start the adventure ...
 beginStory();
-
-class IntranelAdventure {}
