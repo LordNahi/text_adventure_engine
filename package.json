@@ -1,0 +1,23 @@
+{
+  "name": "a_tale_from_intranel",
+  "version": "1.0.0",
+  "description": "A text adventure about my job",
+  "main": "lib/app.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://lordnahi@bitbucket.org/lordnahi/a_tale_from_intranel.git"
+  },
+  "author": "Nathan Nahi",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/lordnahi/a_tale_from_intranel#readme",
+  "dependencies": {
+    "@types/node": "^11.9.4",
+    "typescript": "^3.3.3"
+  }
+}
