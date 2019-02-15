@@ -82,7 +82,7 @@ function look() {
         break;
     }
   } else {
-    logResponse(currentLocation.description);
+    logResponse(currentLocation.description, 15);
   }
 }
 
@@ -179,12 +179,21 @@ function logAnswer(answer: string) {
   inputLog.push(answer);
 }
 
-function logResponse(response: string) {
-  // TODO: Implement line lengths ...
-
+function logResponse(response: string, lineLength: number = 10) {
   messageLog.push(response);
 
-  console.log("\n", response, "\n");
+  const words = response.split(" ");
+  const lines = [];
+
+  while (words.length > 0) {
+    lines.push(words.splice(0, lineLength));
+  }
+
+  console.log("\n");
+  for (const line of lines) {
+    console.log(line.join(" "));
+  }
+  console.log("\n");
 }
 
 function beginStory() {
