@@ -8,7 +8,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+    "start": "node lib/app.js"
   },
   "repository": {
     "type": "git",

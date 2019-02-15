@@ -1,8 +1,8 @@
 import readline from "readline";
 
 import Location from "./entities/location";
-import { actions, BaseActions } from "./actions";
-import { Directions } from "./directions";
+import { actions, BaseActions } from "./boilerplate/actions";
+import { Directions } from "./boilerplate/directions";
 import { BaseSpace, Point } from "./types";
 
 // TODO: Break the narrator out into its own class ...
