@@ -82,7 +82,7 @@ function look() {
         break;
     }
   } else {
-    logResponse(currentLocation.description, 15);
+    logResponse(currentLocation.description, 12);
   }
 }
 
@@ -150,24 +150,15 @@ function isAction(actionType: string, action: string) {
 }
 
 function intro() {
-  console.log(
-    "                  _____       _                        _   _______    _       "
-  );
-  console.log(
-    "    /\\           |_   _|     | |                      | | |__   __|  | |      "
-  );
-  console.log(
-    "   /  \\   _ __     | |  _ __ | |_ _ __ __ _ _ __   ___| |    | | __ _| | ___  "
-  );
-  console.log(
-    "  / /\\ \\ | '_ \\    | | | '_ \\| __| '__/ _` | '_ \\ / _ \\ |    | |/ _` | |/ _ \\"
-  );
-  console.log(
-    " / ____ \\| | | |  _| |_| | | | |_| | | (_| | | | |  __/ |    | | (_| | |  __/"
-  );
-  console.log(
-    "/_/    \\_\\_| |_| |_____|_| |_|\\__|_|  \\__,_|_| |_|\\___|_|    |_|\\__,_|_|\\___|"
-  );
+  const anIntranelTale = [
+    String.raw`                  _____       _                        _   _______    _       `,
+    String.raw`    /\           |_   _|     | |                      | | |__   __|  | |      `,
+    String.raw`   /  \   _ __     | |  _ __ | |_ _ __ __ _ _ __   ___| |    | | __ _| | ___  `,
+    String.raw`  / /\ \ | '_ \    | | | '_ \| __| '__/ _' | '_ \ / _ \ |    | |/ _' | |/ _ \ `,
+    String.raw` / ____ \| | | |  _| |_| | | | |_| | | (_| | | | |  __/ |    | | (_| | |  __/ `,
+    String.raw`/_/    \_\_| |_| |_____|_| |_|\__|_|  \__,_|_| |_|\___|_|    |_|\__,_|_|\___| `
+  ];
+  console.log(anIntranelTale.join("\n"));
   console.log("\n");
   console.log(
     "You're sitting at your desk bored, you haven't been for lunch yet and you\ndecide you're hungry for a ham Schiacciata. It's a cold winters day, light\nrain pitter patters on the roof.",
