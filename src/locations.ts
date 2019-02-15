@@ -7,10 +7,10 @@
 // description: Will be read out when user inspects item ...
 
 const locations = {
-    desk: {
-        description: "",
-        items: []
-    }
+  desk: {
+    description: "",
+    items: []
+  }
 };
 
-module.exports = locations;
+export default locations;
