@@ -82,11 +82,16 @@ function look() {
         break;
     }
   } else {
-    logResponse(currentLocation.description, 12);
+    logResponse(currentLocation.description);
   }
 }
 
 function move(direction: string) {
+  if (direction === "") {
+    logResponse("Where?");
+    return;
+  }
+
   switch (direction) {
     case Directions.North:
       if (canMove(position, 0, -1)) {
@@ -160,9 +165,8 @@ function intro() {
   ];
   console.log(anIntranelTale.join("\n"));
   console.log("\n");
-  console.log(
-    "You're sitting at your desk bored, you haven't been for lunch yet and you\ndecide you're hungry for a ham Schiacciata. It's a cold winters day, light\nrain pitter patters on the roof.",
-    "\n"
+  logFormat(
+    "You're sitting at your desk bored, you haven't been for lunch and you decide you're hungry for a ham Schiacciata. It's a cold winters day, light rain pitter patters on the roof."
   );
 }
 
@@ -170,10 +174,14 @@ function logAnswer(answer: string) {
   inputLog.push(answer);
 }
 
-function logResponse(response: string, lineLength: number = 10) {
+function logResponse(response: string) {
   messageLog.push(response);
 
-  const words = response.split(" ");
+  logFormat(response);
+}
+
+function logFormat(string: string, lineLength: number = 15) {
+  const words = string.split(" ");
   const lines = [];
 
   while (words.length > 0) {
@@ -182,7 +190,7 @@ function logResponse(response: string, lineLength: number = 10) {
 
   console.log("\n");
   for (const line of lines) {
-    console.log(line.join(" "));
+    console.log("    ", line.join(" "));
   }
   console.log("\n");
 }
