@@ -20,6 +20,10 @@
   "homepage": "https://bitbucket.org/lordnahi/a_tale_from_intranel#readme",
   "dependencies": {
     "@types/node": "^11.9.4",
-    "typescript": "^3.3.3"
+    "typescript": "^3.3.3",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/uuid": "^3.4.4"
   }
 }

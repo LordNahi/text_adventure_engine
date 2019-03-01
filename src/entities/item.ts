@@ -1,8 +1,12 @@
-class Item {
+import BaseEntity from "./baseEntity";
+
+class Item extends BaseEntity {
   private name: string;
   private description: string;
 
-  constructor(name: string, description: string) {
+  constructor(name: string, description: string, x: number, y: number) {
+    super(x, y);
+
     this.name = name;
     this.description = description;
   }
@@ -15,13 +19,11 @@ class Item {
       startsWithVowel = true;
     }
 
-    console.log(
-      startsWithVowel ? "It's an " + this.name : "It's a " + this.name
-    );
+    return startsWithVowel ? "It's an " + this.name : "It's a " + this.name;
   };
 
   public describe = () => {
-    console.log(this.description);
+    return this.description;
   };
 }
 

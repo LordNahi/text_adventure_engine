@@ -1,16 +1,19 @@
-// Location Spec
-// description: Will be read out when user uses "look" command ...
-// items: Items you can interact with in this location ...
+import BaseEntity from "./entities/baseEntity";
+import Location from "./entities/location";
 
-// Item Spec
-// name: String value representing item name
-// description: Will be read out when user inspects item ...
+const desk = new Location(
+  "Desk",
+  "I'm sitting at my messy desk, at a glance, there are approximately five empty AllPress coffee cups that need to be thrown out."
+);
+
+const chainFinancialOffice = new Location(
+  "ChainFinancial area",
+  "I'm standing in the ChainFinancial space of our the office, interestingly there doesn't appear to be anybody around, last time I checked the office was full? Strange..."
+);
 
 const locations = {
-  desk: {
-    description: "",
-    items: []
-  }
+  desk,
+  chainFinancialOffice
 };
 
 export default locations;
