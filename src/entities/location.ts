@@ -44,6 +44,10 @@ class Location extends BaseEntity {
   }
 
   public describe = () => {
+    /**
+     * TODO: Log out each direction descriptor for each direction ...
+     */
+
     return this.description;
   };
 
