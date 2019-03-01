@@ -2,6 +2,7 @@ import readline, { Interface as ReadlineInterface } from "readline";
 
 import { getUniqueResponse } from "../data/uniqueResponses";
 import { actions, BaseActions } from "../boilerplate/actions";
+import Location from "./location";
 import Player from "./player";
 
 class Narrator {
@@ -12,9 +13,15 @@ class Narrator {
   });
   inputLog: string[] = [];
   messageLog: string[] = [];
+  movementLog: string[] = [];
+  visitedLog: string[] = [];
 
   constructor(player: Player) {
     this.player = player;
+
+    const firstRoom = this.player.visitedLocations[0];
+    this.movementLog.push(firstRoom.id);
+    this.visitedLog.push(firstRoom.id);
   }
 
   intro = () => {
@@ -61,6 +68,11 @@ class Narrator {
     } else {
       if (this.isAction(BaseActions.move, verb)) {
         this.logResponse(this.player.move(noun));
+        this.movementLog.push(this.player.currentLocation.id);
+
+        if (this.hasPlayerVisitedLocation()) {
+          this.logResponse(this.player.currentLocation.describe());
+        }
       } else if (this.isAction(BaseActions.interact, verb)) {
       } else if (this.isAction(BaseActions.attack, verb)) {
       } else if (this.isAction(BaseActions.look, verb)) {
@@ -74,10 +86,20 @@ class Narrator {
         if (response) {
           this.logResponse(response);
         } else {
-          this.logResponse("I don't know how to " + verb);
+          this.logResponse(`I don't know how to "${verb}"`);
         }
       }
     }
+  };
+
+  logResponse = (response: string) => {
+    this.messageLog.push(response);
+
+    this.logFormat(response);
+  };
+
+  logAnswer = (answer: string) => {
+    this.inputLog.push(answer);
   };
 
   logFormat = (string: string, lineLength: number = 15) => {
@@ -95,14 +117,19 @@ class Narrator {
     console.log("\n");
   };
 
-  logResponse = (response: string) => {
-    this.messageLog.push(response);
+  hasPlayerVisitedLocation = () => {
+    const visitedLogLength = this.visitedLog.length;
+    const visitedLocationsLength = this.player.visitedLocations.length;
+    const newestLocation = this.player.visitedLocations[
+      visitedLocationsLength - 1
+    ];
 
-    this.logFormat(response);
-  };
+    if (visitedLocationsLength > visitedLogLength) {
+      this.visitedLog.push(newestLocation.id);
 
-  logAnswer = (answer: string) => {
-    this.inputLog.push(answer);
+      return true;
+    }
+    return false;
   };
 
   promptUser = () => {

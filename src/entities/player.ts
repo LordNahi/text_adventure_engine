@@ -9,13 +9,14 @@ class Player extends BaseEntity {
   currentLocation: Location;
   world: Location[][];
   inventory: Item[] = [];
-  visited: string[] = [];
+  visitedLocations: Location[] = [];
 
   constructor(world: Location[][], x: number, y: number) {
     super(x, y);
 
     this.world = world;
     this.currentLocation = world[x][y];
+    this.visitedLocations.push(this.currentLocation);
   }
 
   public look = () => {
@@ -37,11 +38,11 @@ class Player extends BaseEntity {
       case Directions.West:
         return this.step(-1, 0) ? "Headed West..." : "I can't go West...";
       default:
-        return direction + " is not a direction.";
+        return `"${direction}" is not a direction.`;
     }
   };
 
-  private step = (x: number, y: number, onSuccess?: string) => {
+  private step = (x: number, y: number) => {
     const xx = this.x + x;
     const yy = this.y + y;
     const potentialLocation = this.world[yy] && this.world[yy][xx];
@@ -50,7 +51,7 @@ class Player extends BaseEntity {
       this.x += x;
       this.y += y;
 
-      this.trackLocation(this.currentLocation);
+      this.trackLocation(potentialLocation);
 
       return true;
     } else {
@@ -61,11 +62,12 @@ class Player extends BaseEntity {
   private trackLocation = (location: Location) => {
     this.currentLocation = location;
 
-    if (!this.visited.includes(location.id)) {
-      this.visited.push(location.id);
-
-      return location.describe();
+    for (const visitedLocation of this.visitedLocations) {
+      if (location.id === visitedLocation.id) {
+        return;
+      }
     }
+    this.visitedLocations.push(location);
   };
 }
 
