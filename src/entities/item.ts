@@ -1,12 +1,10 @@
 import BaseEntity from "./baseEntity";
 
-class Item extends BaseEntity {
+class Item {
   private name: string;
   private description: string;
 
-  constructor(name: string, description: string, x: number, y: number) {
-    super(x, y);
-
+  constructor(name: string, description: string) {
     this.name = name;
     this.description = description;
   }

@@ -2,10 +2,8 @@ import BaseEntity from "./baseEntity";
 import Location from "./location";
 import Item from "./item";
 import { Directions } from "../boilerplate/directions";
-import { BaseSpace, PlayerStance, Point } from "../types";
 
 class Player extends BaseEntity {
-  stance: PlayerStance = PlayerStance.Sitting;
   currentLocation: Location;
   world: Location[][];
   inventory: Item[] = [];
@@ -17,6 +15,7 @@ class Player extends BaseEntity {
     this.world = world;
     this.currentLocation = world[x][y];
     this.visitedLocations.push(this.currentLocation);
+    this.trackLocation(this.currentLocation);
   }
 
   public look = () => {
@@ -25,7 +24,7 @@ class Player extends BaseEntity {
 
   public move = (direction: string) => {
     if (direction === "") {
-      return "Where?";
+      return "What direction?";
     }
 
     switch (direction) {

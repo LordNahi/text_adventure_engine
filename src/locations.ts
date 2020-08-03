@@ -3,7 +3,10 @@ import Location from "./entities/location";
 
 const desk = new Location(
   "Desk",
-  "I'm sitting at my messy desk, at a glance, there are approximately five empty AllPress coffee cups that need to be thrown out."
+  "I'm sitting at my messy desk, at a glance, there are approximately five empty AllPress coffee cups that need to be thrown out.",
+  "",
+  "",
+  "Behind me is the ChainFinancial team area, currently mysteriously empty..."
 );
 
 const chainFinancialOffice = new Location(
@@ -13,7 +16,7 @@ const chainFinancialOffice = new Location(
 
 const locations = {
   desk,
-  chainFinancialOffice
+  chainFinancialOffice,
 };
 
 export default locations;

@@ -15,8 +15,6 @@ class Location extends BaseEntity {
   public readonly eastDescription: string;
   public readonly southDescription: string;
   public readonly westDescription: string;
-  public readonly onDepartMessage: string;
-  public readonly onArriveMessage: string;
   public readonly items: Item[];
 
   constructor(
@@ -26,8 +24,6 @@ class Location extends BaseEntity {
     eastDescription?: string,
     southDescription?: string,
     westDescription?: string,
-    onDepartMessage?: string,
-    onArriveMessage?: string,
     initialItems?: Item[]
   ) {
     super();
@@ -38,25 +34,25 @@ class Location extends BaseEntity {
     this.eastDescription = eastDescription || "";
     this.southDescription = southDescription || "";
     this.westDescription = westDescription || "";
-    this.onDepartMessage = onDepartMessage || "";
-    this.onArriveMessage = onArriveMessage || "";
     this.items = initialItems || [];
   }
 
   public describe = () => {
-    /**
-     * TODO: Log out each direction descriptor for each direction ...
-     */
-
-    return this.description;
+    return [
+      this.description,
+      this.northDescription,
+      this.eastDescription,
+      this.southDescription,
+      this.westDescription,
+    ];
   };
 
-  public onDepart = () => {
-    return this.onDepartMessage;
-  };
-
-  public onArrive = () => {
-    return this.onArriveMessage;
+  public onArrive = (hasVisited?: boolean) => {
+    if (!hasVisited) {
+      return this.describe();
+    } else {
+      return "";
+    }
   };
 
   public addItem = (item: Item) => {
