@@ -6,5 +6,5 @@ const coffeeCup = new Item(
 );
 
 export default {
-  coffeeCup
+  coffeeCup,
 };

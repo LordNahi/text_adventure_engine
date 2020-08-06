@@ -56,6 +56,16 @@ class Narrator {
     let noun = "";
 
     // Split up words ...
+    /**
+     * TODO: This will need more complex logic when using
+     * certain items...
+     *
+     * I imagine certain actions pertaining to items / things, will have
+     * a third word like "with" or "on" to
+     *
+     * attack ogre with sword
+     *
+     */
     switch (words.length) {
       case 1:
         verb = words[0];
@@ -71,6 +81,9 @@ class Narrator {
       this.handleResponse("You do nothing.");
     } else {
       if (this.isAction(BaseActions.move, verb)) {
+        /**
+         * Handle movement action ...
+         */
         this.handleResponse(this.player.move(noun));
         this.movementLog.push(this.player.currentLocation.id);
 
@@ -78,8 +91,17 @@ class Narrator {
           this.player.currentLocation.onArrive(this.hasPlayerVisitedLocation())
         );
       } else if (this.isAction(BaseActions.interact, verb)) {
+        /**
+         * Handle interaction action ...
+         */
       } else if (this.isAction(BaseActions.attack, verb)) {
+        /**
+         * Handle attack action ...
+         */
       } else if (this.isAction(BaseActions.look, verb)) {
+        /**
+         * Handle look action ...
+         */
         this.handleResponse(this.player.look());
       } else {
         /**
@@ -100,28 +122,6 @@ class Narrator {
     this.inputLog.push(answer);
   };
 
-  formatResponse = (response: string, lineLength: number = 15) => {
-    this.messageLog.push(response);
-
-    let formattedResponse = "";
-    let lines = [];
-    let words = response.split(" ");
-
-    while (words.length > 0) {
-      lines.push(words.splice(0, lineLength));
-    }
-
-    for (const line of lines) {
-      formattedResponse += `    ${line.join(" ")}`;
-
-      if (line.length === lineLength) {
-        formattedResponse += "\n";
-      }
-    }
-
-    return formattedResponse;
-  };
-
   handleResponse = (response: string | string[]) => {
     if (!response) {
       return;
@@ -135,19 +135,24 @@ class Narrator {
        * compile it into one large formatted response ...
        */
 
+      const cleansedResponses: string[] = [];
+
       // Cleanse response of empty strings ...
-      response.forEach((res: string, index: number, arr: Array<string>) => {
-        if (!res) {
-          arr.splice(index, 1);
+      response.forEach((res: string) => {
+        if (res) {
+          cleansedResponses.push(res);
         }
       });
 
-      // Rebuild each line from the response ...
-      response.forEach((res: string, index: number) => {
-        compiledResponse += `${this.formatResponse(res)}`;
+      // Rebuild response line by line as a single formatted string ...
+      cleansedResponses.forEach((res: string, index: number) => {
+        const formattedResponse = this.formatResponse(res);
+        const isLastLine = cleansedResponses.length === index + 1;
 
-        if (response.length !== index + 1) {
-          compiledResponse += "\n";
+        compiledResponse += formattedResponse;
+
+        if (!isLastLine) {
+          compiledResponse += "\n\n";
         }
       });
     } else {
@@ -155,7 +160,35 @@ class Narrator {
       compiledResponse += `${this.formatResponse(response)}`;
     }
 
-    console.log(`\n${compiledResponse}\n`);
+    console.log(`\n${compiledResponse}`);
+  };
+
+  formatResponse = (response: string, lineLength: number = 15) => {
+    /**
+     * TODO: lineLength is currently measured in words, this should
+     * be changed to characters as 15 large words is obviously different
+     * to 15 small words dummy ...
+     */
+
+    this.messageLog.push(response);
+
+    let formattedResponse = "";
+    let lines = [];
+    let words = response.split(" ");
+
+    while (words.length > 0) {
+      lines.push(words.splice(0, lineLength));
+    }
+
+    for (let line of lines) {
+      formattedResponse += `    ${line.join(" ")}`;
+
+      if (line.length === lineLength) {
+        formattedResponse += "\n";
+      }
+    }
+
+    return formattedResponse;
   };
 
   hasPlayerVisitedLocation = () => {
@@ -180,7 +213,7 @@ class Narrator {
   };
 
   promptUser = () => {
-    this.prompt.question("What do you do?: ", (answer: string) => {
+    this.prompt.question("\nWhat do you do?: ", (answer: string) => {
       this.logAnswer(answer);
       this.handleAnswer(answer);
 

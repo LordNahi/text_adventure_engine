@@ -18,18 +18,18 @@ class Location extends BaseEntity {
   public readonly items: Item[];
 
   constructor(
-    locationName?: string,
-    description?: string,
+    locationName: string,
+    description: string,
+    initialItems?: Item[],
     northDescription?: string,
     eastDescription?: string,
     southDescription?: string,
-    westDescription?: string,
-    initialItems?: Item[]
+    westDescription?: string
   ) {
     super();
 
-    this.locationName = locationName || "Nowhere.";
-    this.description = description || "There's nothing here to see";
+    this.locationName = locationName;
+    this.description = description;
     this.northDescription = northDescription || "";
     this.eastDescription = eastDescription || "";
     this.southDescription = southDescription || "";
@@ -38,12 +38,19 @@ class Location extends BaseEntity {
   }
 
   public describe = () => {
+    const itemDescriptions = this.items.map((item: Item) => {
+      return !item.hasMoved && item.initialPlacementDescription
+        ? item.initialPlacementDescription
+        : `A ${item.name} is here.`;
+    });
+
     return [
       this.description,
       this.northDescription,
       this.eastDescription,
       this.southDescription,
       this.westDescription,
+      ...itemDescriptions,
     ];
   };
 

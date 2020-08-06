@@ -41,6 +41,11 @@ class Player extends BaseEntity {
     }
   };
 
+  public pickup = (item: Item) => {
+    item.hasMoved = true;
+    this.inventory.push(item);
+  };
+
   private step = (x: number, y: number) => {
     const xx = this.x + x;
     const yy = this.y + y;

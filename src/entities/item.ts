@@ -1,12 +1,26 @@
-import BaseEntity from "./baseEntity";
-
 class Item {
-  private name: string;
-  private description: string;
+  public readonly name: string;
+  public readonly description: string;
+  public readonly initialPlacementDescription?: string;
 
-  constructor(name: string, description: string) {
+  private moved: boolean = false;
+
+  constructor(
+    name: string,
+    description: string,
+    initialPlacementDescription?: string
+  ) {
     this.name = name;
     this.description = description;
+    this.initialPlacementDescription = initialPlacementDescription;
+  }
+
+  set hasMoved(value: boolean) {
+    this.moved = value;
+  }
+
+  get hasMoved(): boolean {
+    return this.moved;
   }
 
   public inspect = () => {
@@ -18,10 +32,6 @@ class Item {
     }
 
     return startsWithVowel ? "It's an " + this.name : "It's a " + this.name;
-  };
-
-  public describe = () => {
-    return this.description;
   };
 }
 
