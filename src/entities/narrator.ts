@@ -55,16 +55,25 @@ class Narrator {
     let verb = "";
     let noun = "";
 
-    // Split up words ...
     /**
      * TODO: This will need more complex logic when using
-     * certain items...
+     * certain verbs...
      *
      * I imagine certain actions pertaining to items / things, will have
-     * a third word like "with" or "on" to
+     * a third word like "with" or "on", for example:
      *
-     * attack ogre with sword
+     * "attack ogre with sword"
      *
+     * After using certain verbs we will need to handle following words
+     * differently. Currently I'm separating input and and very simply
+     * assigning the first word to a verb and the second to a noun, a
+     * situation like the following will come up:
+     *
+     * "take brown sack"
+     *
+     * Here for example, the third word is actually a part of the item name,
+     * this means that we'll need to write unique and limiting logic to handle
+     * all "take" actions.
      */
     switch (words.length) {
       case 1:
