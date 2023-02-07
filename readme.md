@@ -10,6 +10,12 @@ Pull in dependencies
 npm install
 ```
 
+Build
+
+```bash
+npm run build
+```
+
 Run the code
 
 ```bash
