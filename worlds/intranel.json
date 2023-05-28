@@ -1,0 +1,43 @@
+{
+    "name": "An Intranel Tale",
+    "width": 10,
+    "height": 10,
+    "world": [
+        {
+            "name": "Intranel Office",
+            "description": "This is your work office.",
+            "places": [
+                {
+                    "id": 0,
+                    "name": "Desk",
+                    "description": "I'm sitting at my messy desk, at a glance, there are approximately five empty AllPress coffee cups that need to be thrown out.",
+                    "items": [
+                        0
+                    ],
+                    "descriptionSouth": "Behind me is the ChainFinancial team area, currently mysteriously empty...",
+                    "location": {
+                        "x": 5,
+                        "y": 5
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "ChainFinancial Area",
+                    "description": "I'm standing in the ChainFinancial space of our the office, interestingly there doesn't appear to be anybody around, last time I checked the office was full? Strange...",
+                    "items": [],
+                    "location": {
+                        "x": 5,
+                        "y": 6
+                    }
+                }
+            ]
+        }
+    ],
+    "items": [
+        {
+            "id": 0,
+            "name": "Coffee Cup",
+            "description": "A brown and black AllPress coffee cup from the cafe across the road"
+        }
+    ]
+}

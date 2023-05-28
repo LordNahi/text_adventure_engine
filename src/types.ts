@@ -13,20 +13,43 @@ export const enum PlayerStance {
   Sitting = "sitting",
 }
 
-export interface Item {
-  id: string;
-  name: string;
-  description: string;
-}
+export namespace Parser {
+  export interface Item {
+    id: string;
+    name: string;
+    description: string;
+  }
 
-export interface Location {
-  id: string;
-  name: string;
-  description: string;
-  descriptionDistant: string;
-  descriptionNorth?: string;
-  descriptionEast?: string;
-  descriptionSouth?: string;
-  descriptionWest?: string;
-  itemsInitial: string[];
+  export interface Key extends Item {
+    opens: number;
+  }
+
+  export interface Weapon extends Item {}
+
+  export interface Tile {
+    id: string;
+    name: string;
+    items: string[];
+    location: Point;
+    description: string;
+    descriptionVisited: string;
+    descriptionDistant: string;
+    descriptionNorth?: string;
+    descriptionEast?: string;
+    descriptionSouth?: string;
+    descriptionWest?: string;
+  }
+
+  export interface Location {
+    name: string;
+    description: string;
+    places: Tile[];
+  }
+
+  export interface Map {
+    name: string;
+    world: Location[];
+    width: number;
+    height: number;
+  }
 }

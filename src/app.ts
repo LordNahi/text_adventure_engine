@@ -1,7 +1,8 @@
-import Locations from "./locations";
-import Location from "./entities/location";
+import Tile from "./entities/tile";
 import Player from "./entities/player";
 import Narrator from "./entities/narrator";
+
+import WorldManager from "./managers/worldManager";
 
 // TODO: Break the narrator out into its own class ...
 // TODO: Ideally, the user could specify a JSON file for the entire game,
@@ -11,10 +12,13 @@ import Narrator from "./entities/narrator";
 //       room into Location object, the load will simply fail is they don't
 //       format their JSON correctly...
 
-const world: Location[][] = [
-  [Locations.desk],
-  [Locations.chainFinancialOffice]
-];
+const world = WorldManager.loadWorld("intranel");
+
+// const world: Location[][] = [
+//   [Locations.desk],
+//   [Locations.chainFinancialOffice],
+// ];
+
 const player = new Player(world, 0, 0);
 const narrator = new Narrator(player);
 

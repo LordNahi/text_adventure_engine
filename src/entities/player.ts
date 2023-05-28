@@ -1,15 +1,15 @@
 import BaseEntity from "./baseEntity";
-import Location from "./location";
+import Tile from "./tile";
 import Item from "./item";
 import { Directions } from "../boilerplate/directions";
 
 class Player extends BaseEntity {
-  currentLocation: Location;
-  world: Location[][];
+  currentLocation: Tile;
+  world: Tile[][];
   inventory: Item[] = [];
-  visitedLocations: Location[] = [];
+  visitedLocations: Tile[] = [];
 
-  constructor(world: Location[][], x: number, y: number) {
+  constructor(world: Tile[][], x: number, y: number) {
     super(x, y);
 
     this.world = world;
@@ -63,7 +63,7 @@ class Player extends BaseEntity {
     }
   };
 
-  private trackLocation = (location: Location) => {
+  private trackLocation = (location: Tile) => {
     this.currentLocation = location;
 
     for (const visitedLocation of this.visitedLocations) {
