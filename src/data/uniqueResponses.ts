@@ -2,6 +2,10 @@
  * If you want to add responses to random types of input, do it here ...
  */
 
+/**
+ * TODO: This should somehow be a part of the world data ...
+ */
+
 interface IUniqueResponse {
   action: string;
   response: string;
@@ -19,6 +23,6 @@ export function getUniqueResponse(action: string) {
 const randomReponses: IUniqueResponse[] = [
   {
     action: "hello",
-    response: "Hello?"
-  }
+    response: "Hello?",
+  },
 ];
