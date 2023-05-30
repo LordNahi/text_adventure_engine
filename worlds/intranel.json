@@ -38,6 +38,7 @@
         {
             "id": 0,
             "name": "Coffee Cup",
+            "alias": ["cup", "coffeecup", "coffee"],
             "description": "A brown and black AllPress coffee cup from the cafe across the road"
         }
     ]

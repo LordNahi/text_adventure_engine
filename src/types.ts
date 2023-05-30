@@ -19,6 +19,7 @@ export namespace Parser {
     name: string;
     description: string;
     descriptionUntouched?: string;
+    alias: string[];
   }
 
   export interface Key extends Item {

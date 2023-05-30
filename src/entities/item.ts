@@ -5,16 +5,18 @@ class Item {
   public readonly name: string;
   public readonly description: string;
   public readonly descriptionUntouched?: string;
+  public readonly alias: string[];
 
   private moved: boolean = false;
 
   constructor(item: Parser.Item) {
-    const { id, name, description, descriptionUntouched } = item;
+    const { id, name, description, descriptionUntouched, alias = [] } = item;
 
     this.id = id;
     this.name = name;
     this.description = description;
     this.descriptionUntouched = descriptionUntouched;
+    this.alias = alias;
   }
 
   set hasMoved(value: boolean) {

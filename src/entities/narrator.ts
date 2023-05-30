@@ -3,7 +3,6 @@ import readline, { Interface as ReadlineInterface } from "readline";
 import { getUniqueResponse } from "../data/uniqueResponses";
 import { actions, BaseActions } from "../boilerplate/actions";
 import Player from "./player";
-import { format } from "path";
 
 class Narrator {
   player: Player;
@@ -20,6 +19,7 @@ class Narrator {
     this.player = player;
 
     const firstRoom = this.player.visitedLocations[0];
+
     this.movementLog.push(firstRoom.id);
     this.visitedLog.push(firstRoom.id);
   }
@@ -99,6 +99,11 @@ class Narrator {
         this.handleResponse(
           this.player.currentLocation.onArrive(this.hasPlayerVisitedLocation())
         );
+      } else if (this.isAction(BaseActions.collect, verb)) {
+        /**
+         * Handle collect action ...
+         */
+        this.handleResponse(this.player.collect(verb, noun));
       } else if (this.isAction(BaseActions.interact, verb)) {
         /**
          * Handle interaction action ...

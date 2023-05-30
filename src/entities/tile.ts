@@ -64,6 +64,36 @@ class Tile extends BaseEntity {
   public addItem = (item: Item) => {
     this.items.push(item);
   };
+
+  public takeItem = (itemName: string): Item | null => {
+    const item = this.items.find((item) => {
+      // Check for item alias match first ...
+
+      if (item.alias.length) {
+        for (let alias of item.alias) {
+          const lowAlias = alias.toLowerCase();
+          const lowNoun = itemName.toLowerCase();
+
+          if (lowAlias === lowNoun) return true;
+        }
+      }
+
+      // Finally, check for direct noun match ...
+
+      const lowNoun = itemName.toLowerCase();
+      const lowItem = item.name.toLowerCase();
+
+      return lowNoun === lowItem;
+    });
+
+    if (item) {
+      this.items.splice(this.items.indexOf(item), 1);
+
+      return item;
+    } else {
+      return null;
+    }
+  };
 }
 
 export default Tile;
