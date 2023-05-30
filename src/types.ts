@@ -15,9 +15,10 @@ export const enum PlayerStance {
 
 export namespace Parser {
   export interface Item {
-    id: string;
+    id: number;
     name: string;
     description: string;
+    descriptionUntouched?: string;
   }
 
   export interface Key extends Item {
@@ -27,9 +28,9 @@ export namespace Parser {
   export interface Weapon extends Item {}
 
   export interface Tile {
-    id: string;
+    id: number;
     name: string;
-    items: string[];
+    items: number[];
     location: Point;
     description: string;
     descriptionVisited: string;
@@ -42,14 +43,16 @@ export namespace Parser {
 
   export interface Location {
     name: string;
+    start: number;
     description: string;
     places: Tile[];
   }
 
   export interface Map {
     name: string;
-    world: Location[];
     width: number;
     height: number;
+    world: Location[];
+    items: Item[];
   }
 }

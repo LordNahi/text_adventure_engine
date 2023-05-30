@@ -1,18 +1,20 @@
+import { Parser } from "../types";
+
 class Item {
+  public readonly id: number;
   public readonly name: string;
   public readonly description: string;
-  public readonly initialPlacementDescription?: string;
+  public readonly descriptionUntouched?: string;
 
   private moved: boolean = false;
 
-  constructor(
-    name: string,
-    description: string,
-    initialPlacementDescription?: string
-  ) {
+  constructor(item: Parser.Item) {
+    const { id, name, description, descriptionUntouched } = item;
+
+    this.id = id;
     this.name = name;
     this.description = description;
-    this.initialPlacementDescription = initialPlacementDescription;
+    this.descriptionUntouched = descriptionUntouched;
   }
 
   set hasMoved(value: boolean) {

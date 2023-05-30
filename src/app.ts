@@ -1,8 +1,8 @@
-import Tile from "./entities/tile";
 import Player from "./entities/player";
 import Narrator from "./entities/narrator";
 
 import WorldManager from "./managers/worldManager";
+import ItemManager from "./managers/itemManager";
 
 // TODO: Break the narrator out into its own class ...
 // TODO: Ideally, the user could specify a JSON file for the entire game,
@@ -12,14 +12,23 @@ import WorldManager from "./managers/worldManager";
 //       room into Location object, the load will simply fail is they don't
 //       format their JSON correctly...
 
-const world = WorldManager.loadWorld("intranel");
+const itemManager = new ItemManager();
+const worldManager = new WorldManager(itemManager);
 
-// const world: Location[][] = [
-//   [Locations.desk],
-//   [Locations.chainFinancialOffice],
-// ];
+worldManager.loadWorld("intranel");
 
-const player = new Player(world, 0, 0);
+const world = worldManager.getGrid();
+const start = worldManager.getStart();
+
+const startTile = world.find((tile) => {
+  if (tile === null) return false;
+
+  return tile.id === start;
+});
+
+if (!startTile) throw new Error("Failed to find start location");
+
+const player = new Player(world, startTile.x, startTile.y);
 const narrator = new Narrator(player);
 
 function beginStory() {

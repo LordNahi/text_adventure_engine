@@ -1,12 +1,10 @@
-import uuid from "uuid/v4";
-
 abstract class BaseEntity {
-  public readonly id: string;
+  public readonly id: number;
   public x: number;
   public y: number;
 
-  constructor(x: number = 0, y: number = 0) {
-    this.id = uuid();
+  constructor(id: number, x: number = 0, y: number = 0) {
+    this.id = id;
     this.x = x;
     this.y = y;
   }

@@ -2,8 +2,8 @@
  * A 2D matrix, when instantiated, cells are initialised to null ...
  */
 class MX2<T> {
-  private width;
-  private height;
+  private width: number;
+  private height: number;
   private grid: (T | null)[][] = [];
 
   constructor(width: number, height: number) {
@@ -11,7 +11,13 @@ class MX2<T> {
     this.height = height;
 
     for (let my = 0; my < height; my++) {
-      this.grid[my] = Array(width).map((_) => null);
+      const arr: null[] = [];
+
+      for (let mx = 0; mx < width; mx++) {
+        arr[mx] = null;
+      }
+
+      this.grid[my] = arr;
     }
   }
 
@@ -29,9 +35,23 @@ class MX2<T> {
   public forEach(callback: (item: T | null, x: number, y: number) => void) {
     for (let my = 0; my < this.height; my++) {
       for (let mx = 0; mx < this.width; mx++) {
-        callback(this.grid[mx][my], mx, my);
+        callback(this.grid[my][mx], mx, my);
       }
     }
+  }
+
+  public find(
+    predicate: (item: T | null, x: number, y: number) => boolean
+  ): T | null {
+    // Return T when predicate returns true ...
+    for (let my = 0; my < this.height; my++) {
+      for (let mx = 0; mx < this.width; mx++) {
+        if (predicate(this.grid[my][mx], mx, my) === true) {
+          return this.grid[my][mx];
+        }
+      }
+    }
+    return null;
   }
 }
 

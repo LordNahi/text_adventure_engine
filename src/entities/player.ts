@@ -2,18 +2,23 @@ import BaseEntity from "./baseEntity";
 import Tile from "./tile";
 import Item from "./item";
 import { Directions } from "../boilerplate/directions";
+import { MX2 } from "../helper/matrix";
 
 class Player extends BaseEntity {
   currentLocation: Tile;
-  world: Tile[][];
+  world: MX2<Tile>;
   inventory: Item[] = [];
   visitedLocations: Tile[] = [];
 
-  constructor(world: Tile[][], x: number, y: number) {
-    super(x, y);
+  constructor(world: MX2<Tile>, startX: number, startY: number) {
+    super(startX, startY);
+
+    const start = world.get(startX, startY);
+
+    if (!start) throw new Error("Failed to establish player start location");
 
     this.world = world;
-    this.currentLocation = world[x][y];
+    this.currentLocation = start;
     this.visitedLocations.push(this.currentLocation);
     this.trackLocation(this.currentLocation);
   }
@@ -49,7 +54,7 @@ class Player extends BaseEntity {
   private step = (x: number, y: number) => {
     const xx = this.x + x;
     const yy = this.y + y;
-    const potentialLocation = this.world[yy] && this.world[yy][xx];
+    const potentialLocation = this.world.get(yy, xx);
 
     if (potentialLocation) {
       this.x += x;

@@ -13,8 +13,8 @@ class Narrator {
   });
   inputLog: string[] = [];
   messageLog: string[] = [];
-  movementLog: string[] = [];
-  visitedLog: string[] = [];
+  movementLog: number[] = [];
+  visitedLog: number[] = [];
 
   constructor(player: Player) {
     this.player = player;
@@ -209,9 +209,8 @@ class Narrator {
 
     const visitedLogLength = this.visitedLog.length;
     const visitedLocationsLength = this.player.visitedLocations.length;
-    const newestLocation = this.player.visitedLocations[
-      visitedLocationsLength - 1
-    ];
+    const newestLocation =
+      this.player.visitedLocations[visitedLocationsLength - 1];
 
     if (visitedLocationsLength > visitedLogLength) {
       this.visitedLog.push(newestLocation.id);

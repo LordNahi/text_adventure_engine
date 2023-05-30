@@ -4,7 +4,6 @@ import BaseEntity from "./baseEntity";
 import { Parser } from "../types";
 
 class Tile extends BaseEntity {
-  public readonly id: string;
   public readonly locationName: string;
   public readonly description: string;
   public readonly northDescription: string;
@@ -13,11 +12,10 @@ class Tile extends BaseEntity {
   public readonly westDescription: string;
   public readonly items: Item[];
 
-  constructor(tile: Omit<Parser.Tile, "items">, items: Item[]) {
-    super();
+  constructor(tile: Parser.Tile, items: Item[]) {
+    super(tile.id, tile.location.x, tile.location.y);
 
     const {
-      id,
       name,
       description,
       descriptionNorth,
@@ -28,7 +26,6 @@ class Tile extends BaseEntity {
       descriptionVisited,
     } = tile;
 
-    this.id = id;
     this.locationName = name;
     this.description = description;
     this.northDescription = descriptionNorth || "";
@@ -41,8 +38,8 @@ class Tile extends BaseEntity {
 
   public describe = () => {
     const itemDescriptions = this.items.map((item: Item) => {
-      return !item.hasMoved && item.initialPlacementDescription
-        ? item.initialPlacementDescription
+      return !item.hasMoved && item.descriptionUntouched
+        ? item.descriptionUntouched
         : `A ${item.name} is here.`;
     });
 

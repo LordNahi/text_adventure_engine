@@ -6,6 +6,7 @@
         {
             "name": "Intranel Office",
             "description": "This is your work office.",
+            "start": 0,
             "places": [
                 {
                     "id": 0,
