@@ -1,35 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/electron-vite.animate.svg'
-import './App.css'
+import path from "path";
+import fs from "fs";
+
+import "./App.css";
+
+const PATH_TO_WORLDS = path.resolve(__dirname, "./worlds");
+const PATH_TO_WORLD = path.resolve(PATH_TO_WORLDS, "./intranel.json");
+
+const loadWorld = () => {
+  const data = fs.readFileSync(PATH_TO_WORLD, "utf8");
+
+  console.log(data);
+};
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="app-container">
+      <section className="section-base menu-context">
+        <div className="grid-container"></div>
+      </section>
+      <section className="section-base menu-grid"></section>
+    </div>
+  );
 }
 
-export default App
+export default App;
