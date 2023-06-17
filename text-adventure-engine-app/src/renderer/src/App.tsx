@@ -1,4 +1,4 @@
-import DungeonGrid from './components/DungeonGrid/DungeonGrid';
+import DungeonGrid from './components/DungeonGrid';
 
 import { appContainer, sectionBase, menuContext, menuContent } from './AppStyle';
 import { classes } from 'typestyle/lib/internal/utilities';
