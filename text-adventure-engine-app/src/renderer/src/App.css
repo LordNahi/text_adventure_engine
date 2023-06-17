@@ -1,0 +1,46 @@
+:root {
+    --primary: #272727;
+    --secondary: #1e1e1e;
+  }
+  
+  .app-container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  .section-base {
+    display: flex;
+  }
+  
+  .menu-context {
+    flex-basis: 25%;
+    background-color: var(--secondary);
+  }
+  
+  .menu-grid {
+    flex-basis: 75%;
+    background-color: var(--primary);
+  }
+  
+  /* Grid Stuff */
+  
+  .grid-container {
+    padding: 10px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 10px;
+    background-color:aqua;
+  }
+  
+  .grid-item {
+    width: 20px;
+    height: 20px;
+    background-color:crimson;
+    font-size: 24px;
+    padding: 20px;
+    text-align: center;
+  }
