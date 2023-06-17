@@ -20,7 +20,6 @@ export const gridContent = style({
   height: 'fit-content',
   width: 'fit-content',
   display: 'grid',
-  padding: '10px',
   gridTemplateColumns: '1fr 1fr 1fr',
   gridTemplateRows: '1fr 1fr 1fr',
   gap: '10px',
